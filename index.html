@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+</head>
+<body>
+  <div id="fixture"></div>
+  <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+  <script src="./create-react-class.min.js"></script>
+  <script src="./brightcove-react-player-loader.min.js"></script>
+  <script>
+    (function() {
+      var fixture = document.getElementById('fixture');
+      var React = window.React;
+      var ReactDOM = window.ReactDOM;
+      var MyCustomApp = window.createReactClass({
+        getInitialState: function() {
+          return {
+            accountId: 6057940518001,
+            videoId: 6206786304001
+          };
+        },
+        render: function() {
+          return React.createElement(window.BrightcoveReactPlayerLoader, {
+            accountId: this.state.accountId,
+            videoId: this.state.videoId,
+            onSuccess: function(player) {
+              if (console) {
+                console.log('successfully created player', player);
+              }
+            },
+            onFailure: function(err) {
+              if (console) {
+                console.log('failed to create player', err);
+              }
+            },
+            key: this.state
+          });
+        }
+      });
+
+      window.customApp = ReactDOM.render(React.createElement(MyCustomApp), fixture);
+    })();
+
+  </script>
+</body>
+</html>
